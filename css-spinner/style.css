@@ -18,9 +18,9 @@ i {
     display: block;
     width: 5px;
     height: 5px;
-    background-color: #85bddd;
+    background-color: #d7ff82;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(133, 189, 221, 0.5);
+    box-shadow: 0px 0px 10px rgba(215, 255, 130, 0.5);
     -webkit-animation-name: spin;
     animation-name: spin;
     -webkit-animation-duration: 3s;
@@ -211,11 +211,11 @@ i:nth-child(25) {
 
   15% {
     background-color: #fff;
-    box-shadow: 0px 0px 10px #85bddd;
+    box-shadow: 0px 0px 10px #d7ff82;
     -webkit-transform: translate(-3.7594px, -2.5px) scale(2); }
 
   50% {
-    box-shadow: 0px 0px 10px rgba(133, 189, 221, 0.75);
+    box-shadow: 0px 0px 10px rgba(215, 255, 130, 0.75);
     -webkit-transform: scale(1); } }
 
 @keyframes spin {
@@ -224,9 +224,9 @@ i:nth-child(25) {
 
   15% {
     background-color: #fff;
-    box-shadow: 0px 0px 10px #85bddd;
+    box-shadow: 0px 0px 10px #d7ff82;
     transform: translate(-3.7594px, -2.5px) scale(2); }
 
   50% {
-    box-shadow: 0px 0px 10px rgba(133, 189, 221, 0.75);
+    box-shadow: 0px 0px 10px rgba(215, 255, 130, 0.75);
     transform: scale(1); } }
