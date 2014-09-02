@@ -1,0 +1,123 @@
+$particles: 25; // has to match number of nodes in dom
+$particleSize: 5px;
+$radius: 25;
+$lapDuration: 3s;
+$color: #D7FF82;
+
+@mixin perspective( $perspective ){
+  -webkit-perspective: $perspective;
+          perspective: $perspective;
+}
+
+@mixin animation-name( $name ){
+  -webkit-animation-name: $name;
+          animation-name: $name;
+}
+
+@mixin animation-duration( $duration ){
+  -webkit-animation-duration: $duration;
+          animation-duration: $duration;
+}
+
+@mixin animation-iteration-count( $iteration-count ){
+  -webkit-animation-iteration-count: $iteration-count;
+          animation-iteration-count: $iteration-count;
+}
+
+@mixin animation-timing-function( $timing-function ){
+  -webkit-animation-timing-function: $timing-function;
+          animation-timing-function: $timing-function;
+}
+
+@mixin animation-delay( $animation-delay ){
+  -webkit-animation-delay: $animation-delay;
+          animation-delay: $animation-delay;
+}
+
+@mixin transform( $transform ){
+  -webkit-transform: $transform;
+          transform: $transform;
+}
+
+@mixin keyframes( $name ){
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+html, body {
+  overflow: hidden;
+  background: #111;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  @include perspective( 200px );
+}
+
+i {
+  display: block;
+  position: absolute;
+  opacity: 1;
+
+  b {
+    display: block;
+    width: $particleSize;
+    height: $particleSize;
+    background-color: $color;
+    border-radius: $particleSize;
+    box-shadow: 0px 0px 10px rgba( $color, 0.5 );
+    @include animation-name( spin );
+    @include animation-duration( $lapDuration );
+    @include animation-iteration-count( infinite );
+    @include animation-timing-function( ease-in-out );
+  }
+}
+
+@for $i from 1 through $particles {
+  i:nth-child(#{$i}) {
+    $angle: ( $i / $particles ) * 360;
+
+    @include transform( rotate( #{$angle}deg ) translate3d( #{$radius}px, 0, 0 ));
+
+    b {
+      @include animation-delay( $i * ($lapDuration / ( $particles )));
+    }
+  }
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: scale( 1 );
+  }
+  15% {
+    background-color: #fff;
+    box-shadow: 0px 0px 10px $color;
+    -webkit-transform: translate( -$particleSize/1.33, -$particleSize/2 ) scale( 2 );
+  }
+  50% {
+    box-shadow: 0px 0px 10px rgba( $color, 0.75);
+    -webkit-transform: scale( 1 );
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: scale( 1 );
+  }
+  15% {
+    background-color: #fff;
+    box-shadow: 0px 0px 10px $color;
+    transform: translate( -$particleSize/1.33, -$particleSize/2 ) scale( 2 );
+  }
+  50% {
+    box-shadow: 0px 0px 10px rgba( $color, 0.75 );
+    transform: scale( 1 );
+  }
+}
