@@ -2,6 +2,7 @@ body {
   padding: 0;
   margin: 0;
   background: #2c1b0c url('/widgets/img/bkg.png');
+  background-attachment: fixed;
   font-family: 'Questrial';
   font-size: 23px;
 }
