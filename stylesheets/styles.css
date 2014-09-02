@@ -1,9 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
-
 body {
   padding: 0;
   margin: 0;
-  background: #2c1b0c url('/img/bkg.png');
+  background: #2c1b0c url('/widgets/img/bkg.png');
   font-family: 'Questrial';
   font-size: 23px;
 }
