@@ -78,7 +78,7 @@ section {
   border-radius: 15px;
   border: 5px solid #D6CD79;
   position: relative;
-  margin: 0 auto 10% auto;
+  margin: 140px auto 10px auto;
   padding: 2em 5%;
   background: #FFFBD8;
   background-position: center center;
@@ -142,6 +142,7 @@ code, pre {
 pre {
   padding:8px 15px;
   background: #f8f8f8;
+  background: rgba(248, 248, 248, 0.75);
   border-radius:5px;
   border:1px solid #e5e5e5;
   overflow-x: auto;

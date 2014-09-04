@@ -1,7 +1,7 @@
 $particles: 25; // has to match number of nodes in dom
 $particleSize: 5px;
 $radius: 25;
-$lapDuration: 3s;
+$lapDuration: 1500ms;
 $color: #D7FF82;
 
 @mixin perspective( $perspective ){
@@ -53,12 +53,19 @@ html, body {
   background: #111;
 }
 
+img {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .spinner {
   position: absolute;
   top: 50%;
   left: 50%;
   z-index: 2;
   @include perspective( 200px );
+  @include transform( rotate( -90deg ));
 }
 
 i {
@@ -80,6 +87,9 @@ i {
   }
 }
 
+$midpoint: $particles / 2;
+$delay: $lapDuration / $particles;
+
 @for $i from 1 through $particles {
   i:nth-child(#{$i}) {
     $angle: ( $i / $particles ) * 360;
@@ -87,7 +97,7 @@ i {
     @include transform( rotate( #{$angle}deg ) translate3d( #{$radius}px, 0, 0 ));
 
     b {
-      @include animation-delay( $i * ($lapDuration / ( $particles )));
+      @include animation-delay( $i * $delay);
     }
   }
 }
