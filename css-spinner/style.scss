@@ -4,6 +4,49 @@ $radius: 25;
 $lapDuration: 1500ms;
 $color: #D7FF82;
 
+$pi: 3.14159265359;
+
+@function pow($number, $exp) {
+  $value: $number;
+  @if $exp > 0 {
+    // If the exponent is positive, multiply.
+    @for $i from 2 through $exp {
+      $value: $value * $number;
+    }
+  }
+  @else if $exp < 0 {
+    // If the exponent is negative, divide.
+    @for $i from 0 through -$exp {
+      $value: $value / $number;
+    }
+  }
+  @else {
+    // If the exponent is zero, just return 1.
+    $value: 1;
+  }
+  @return $value;
+}
+
+@function fact($number) {
+  $value: 1;
+  @if $number > 0 {
+    @for $i from 1 through $number {
+      $value: $value * $i;
+    }
+  }
+  @return $value;
+}
+
+@function sin($angle) {
+  $sin: 0;
+  $angle: $angle / 180 * $pi;
+  // Iterate a bunch of times.
+  @for $i from 0 through 10 {
+    $sin: $sin + pow(-1, $i) * pow($angle, (2 * $i + 1)) / fact(2 * $i + 1);
+  }
+  @return $sin;
+}
+
 @mixin perspective( $perspective ){
   -webkit-perspective: $perspective;
           perspective: $perspective;
@@ -65,7 +108,7 @@ img {
   left: 50%;
   z-index: 2;
   @include perspective( 200px );
-  @include transform( rotate( -90deg ));
+  @include transform( rotate( 180deg ));
 }
 
 i {
@@ -87,17 +130,25 @@ i {
   }
 }
 
-$midpoint: $particles / 2;
+$accDelay: 0;
 $delay: $lapDuration / $particles;
-
+/* #{$delay} */
 @for $i from 1 through $particles {
   i:nth-child(#{$i}) {
     $angle: ( $i / $particles ) * 360;
+    $extra: sin( $angle ) * ($delay / 2);
 
     @include transform( rotate( #{$angle}deg ) translate3d( #{$radius}px, 0, 0 ));
-
     b {
-      @include animation-delay( $i * $delay);
+      /* accDelay: #{$accDelay} */
+      /* angle: #{$angle} */
+      /* sin: #{sin( $angle )} */
+      /* extra: #{$extra} */
+      /* sum (> 0): #{$delay + $extra} */
+      $frameDelay: $accDelay + $delay + $extra;
+      $accDelay: $frameDelay;
+      /* new accDelay: #{$accDelay} */
+      @include animation-delay( $frameDelay );
     }
   }
 }
